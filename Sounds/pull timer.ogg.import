@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://behosy1wfs4no"
+path="res://.godot/imported/pull timer.ogg-a00f72269b61f13d16e3046940fc32f6.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/pull timer.ogg"
+dest_files=["res://.godot/imported/pull timer.ogg-a00f72269b61f13d16e3046940fc32f6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcaci83fcr8pl"]
+
+[ext_resource type="Texture2D" uid="uid://dwdcrx5opyenk" path="res://Player/rdps.svg" id="1_3qydi"]
+[ext_resource type="Script" uid="uid://06qke7yl2adt" path="res://Player/player.gd" id="1_q3lat"]
+[ext_resource type="AudioStream" uid="uid://colqepvkfytl3" path="res://Sounds/FX_Adventures_Bow_Arrow_Shoot_Cast_01.ogg" id="3_8g4oa"]
+[ext_resource type="AudioStream" uid="uid://df5yrrqpuqk7w" path="res://Sounds/FX_Adventures_Bow_Arrow_Shoot_Cast_02.ogg" id="4_6ysni"]
+[ext_resource type="AudioStream" uid="uid://bh0de3l88fo7r" path="res://Sounds/FX_Adventures_Bow_Arrow_Shoot_Cast_03.ogg" id="5_vlldt"]
+[ext_resource type="AudioStream" uid="uid://c0vp7sqjix857" path="res://Sounds/oof.mp3" id="6_6ysni"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2ndj"]
+radius = 48.0416
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s1rgi"]
+streams_count = 3
+stream_0/stream = ExtResource("3_8g4oa")
+stream_1/stream = ExtResource("4_6ysni")
+stream_2/stream = ExtResource("5_vlldt")
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+scale = Vector2(0.5, 0.5)
+motion_mode = 1
+script = ExtResource("1_q3lat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = ExtResource("1_3qydi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l2ndj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_s1rgi")
+volume_db = -20.0
+max_polyphony = 10
+
+[node name="DamagePlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_6ysni")
+max_polyphony = 3

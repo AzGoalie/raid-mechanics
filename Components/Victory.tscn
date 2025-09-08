@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5st5hauwwvsw"]
+
+[ext_resource type="Script" uid="uid://b0khv0ks41s3s" path="res://Components/victory.gd" id="1_0o7rv"]
+[ext_resource type="FontFile" uid="uid://drh8lboc153ah" path="res://Fonts/LibreBaskerville-Regular.ttf" id="2_24gty"]
+[ext_resource type="AudioStream" uid="uid://bx8vtmrpa0wuj" path="res://Sounds/Victory.ogg" id="3_24gty"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ha5m4"]
+bg_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.662745)
+shadow_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_htx36"]
+font = ExtResource("2_24gty")
+font_size = 60
+font_color = Color(0.933333, 1, 0, 1)
+
+[node name="Victory" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0o7rv")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="PanelContainer" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -63.915
+offset_right = 1152.0
+offset_bottom = 63.915
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ha5m4")
+
+[node name="Label" type="Label" parent="Panel/PanelContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -38.0
+offset_right = 181.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Boss Defeated"
+label_settings = SubResource("LabelSettings_htx36")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_24gty")
+volume_db = -10.0
+autoplay = true

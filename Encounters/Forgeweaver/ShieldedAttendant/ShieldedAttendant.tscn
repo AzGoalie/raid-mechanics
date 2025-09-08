@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://nkpnxsc332ls"]
+
+[ext_resource type="Shader" uid="uid://bhc8lnqa7pqj7" path="res://Encounters/Forgeweaver/ShieldedAttendant/shield_effect.tres" id="1_07k2s"]
+[ext_resource type="Texture2D" uid="uid://d01u41cyuvuon" path="res://Encounters/Forgeweaver/ShieldedAttendant/add.png" id="1_dsgww"]
+[ext_resource type="Script" uid="uid://5aesu01pqlst" path="res://Encounters/Forgeweaver/ShieldedAttendant/shielded_attendant.gd" id="2_f286j"]
+[ext_resource type="AudioStream" uid="uid://cgh0okuwfu3cd" path="res://Encounters/Forgeweaver/Sounds/explosion.ogg" id="4_qap5e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qap5e"]
+shader = ExtResource("1_07k2s")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddu0r"]
+radius = 60.0925
+
+[node name="ShieldedAttendant" type="Sprite2D"]
+material = SubResource("ShaderMaterial_qap5e")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_dsgww")
+script = ExtResource("2_f286j")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ddu0r")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_qap5e")
+volume_db = -10.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

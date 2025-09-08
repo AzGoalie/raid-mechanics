@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://fmnht1kdm7r3"]
+
+[ext_resource type="Texture2D" uid="uid://bkfqh1jbx0wsk" path="res://Encounters/Forgeweaver/Pylon/pylon.png" id="1_lnm50"]
+[ext_resource type="Script" uid="uid://c65s2q3bh3yw7" path="res://Encounters/Forgeweaver/Pylon/pylon.gd" id="2_r75f8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnm50"]
+radius = 20.0
+
+[sub_resource type="Animation" id="Animation_r75f8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lnm50"]
+resource_name = "flash"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.501407, 0.501406, 0.501406, 1), Color(1, 1, 1, 1), Color(0.501407, 0.501406, 0.501406, 1), Color(1, 1, 1, 1), Color(0.501407, 0.501406, 0.501406, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgv7x"]
+_data = {
+&"RESET": SubResource("Animation_r75f8"),
+&"flash": SubResource("Animation_lnm50")
+}
+
+[node name="Pylon" type="Sprite2D"]
+texture = ExtResource("1_lnm50")
+script = ExtResource("2_r75f8")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lnm50")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_jgv7x")
+}
+
+[node name="SpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
